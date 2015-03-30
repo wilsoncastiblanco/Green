@@ -15,9 +15,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.green.R;
 import org.green.controllers.main.MainActivity;
 
+import java.lang.reflect.Field;
+
 public class GreenMapFragment extends Fragment {
 
   private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+  private static View view;
 
   public static GreenMapFragment newInstance(){
     GreenMapFragment greenMapFragment = new GreenMapFragment();
@@ -27,9 +30,34 @@ public class GreenMapFragment extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.activity_map, container, false);
+    view = inflater.inflate(R.layout.fragment_map, container, false);
     setUpMapIfNeeded();
     return view;
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+    if (mapFragment != null){
+      getFragmentManager().beginTransaction().remove(mapFragment).commit();
+
+    }
+  }
+
+  @Override
+  public void onDetach() {
+    super.onDetach();
+
+    try {
+      Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+      childFragmentManager.setAccessible(true);
+      childFragmentManager.set(this, null);
+    } catch (NoSuchFieldException e) {
+      throw new RuntimeException(e);
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
@@ -43,6 +71,8 @@ public class GreenMapFragment extends Fragment {
     super.onResume();
     setUpMapIfNeeded();
   }
+
+
 
   /**
    * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -78,6 +108,7 @@ public class GreenMapFragment extends Fragment {
    * This should only be called once and when we are sure that {@link #mMap} is not null.
    */
   private void setUpMap() {
+    mMap.setMyLocationEnabled(true);
     mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
   }
 }
