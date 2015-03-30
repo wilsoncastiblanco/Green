@@ -39,24 +39,9 @@ public class GreenMapFragment extends Fragment {
   public void onDestroyView() {
     super.onDestroyView();
     MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-    if (mapFragment != null){
+    if (!getFragmentManager().isDestroyed() && mapFragment != null){
       getFragmentManager().beginTransaction().remove(mapFragment).commit();
 
-    }
-  }
-
-  @Override
-  public void onDetach() {
-    super.onDetach();
-
-    try {
-      Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-      childFragmentManager.setAccessible(true);
-      childFragmentManager.set(this, null);
-    } catch (NoSuchFieldException e) {
-      throw new RuntimeException(e);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
     }
   }
 
