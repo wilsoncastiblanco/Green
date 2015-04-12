@@ -1,4 +1,4 @@
-package org.green.controllers.tips;
+package org.green.modules.tips;
 
 import android.os.Bundle;
 import android.app.Fragment;
