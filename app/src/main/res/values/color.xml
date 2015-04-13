@@ -4,4 +4,9 @@
     <color name="primary_dark">#7CB342</color>
     <color name="accent">#388E3C</color>
     <color name="window_background">#303030</color>
+    <!-- Markers color -->
+    <color name="batteries_color">#FFC107</color>
+    <color name="tires_color">#CDDC39</color>
+    <color name="spray_color">#009688</color>
+    <color name="medical_color">#2196F3</color>
 </resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/textViewMainTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:text="Title"
+        pixlui:typeface="OpenSans-Regular.ttf"/>
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewMainTitle"
+        android:gravity="center"
+        pixlui:typeface="OpenSans-Light.ttf"/>
+
+    <View
+        android:id="@+id/viewContent"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textViewMessage"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewContent"
+        android:orientation="horizontal">
+
+        <com.neopixl.pixlui.components.button.Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            pixlui:typeface="OpenSans-Regular.ttf"
+            />
+
+        <com.neopixl.pixlui.components.button.Button
+            android:id="@+id/buttonAccept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            pixlui:typeface="OpenSans-Regular.ttf"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

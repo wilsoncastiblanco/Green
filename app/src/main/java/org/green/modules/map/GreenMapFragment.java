@@ -12,7 +12,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.green.R;
+import org.green.api.base.NetworkError;
+import org.green.database.RealmDataBaseConnection;
+import org.green.database.RecollectionPoints.GetRecollectionPoints;
+import org.green.domain.RecollectionPoints;
+import org.green.domain.RecollectionPointsParams;
 import org.green.modules.main.MainActivity;
+import org.green.utilities.NetworkErrorUtil;
+
+import java.util.List;
 
 
 public class GreenMapFragment extends Fragment {
@@ -73,5 +81,34 @@ public class GreenMapFragment extends Fragment {
   private void setUpMap() {
     mMap.setMyLocationEnabled(true);
     mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+  }
+
+  private void getLocationData(){
+    GetRecollectionPoints getRecollectionPoints = new GetRecollectionPoints(getActivity(), new RecollectionPointsParams());
+    getRecollectionPoints.setDestionationsEventListener(new GetRecollectionPoints.DestinationsListEventListener() {
+      @Override
+      public void onDataListLoad() {
+        List<RecollectionPoints> recollectionPointsList = RealmDataBaseConnection.loadRecollectionPointsList();
+
+      }
+
+      @Override
+      public void onDataListError(NetworkError.NetworkErrorType errorType) {
+        new NetworkErrorUtil(getActivity(), getFragmentManager(), errorType, new NetworkErrorUtil.NetworkErrorEventListener() {
+          @Override
+          public void OnRetryNetworkConnection() {
+            getLocationData();
+          }
+
+          @Override
+          public void OnEmptyResponse() {
+          }
+
+          @Override
+          public void OnCancelConnection() {
+          }
+        });
+      }
+    });
   }
 }

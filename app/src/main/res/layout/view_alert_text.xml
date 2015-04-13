@@ -1,0 +1,16 @@
+<RelativeLayout
+    android:id="@+id/relativeLayoutTitleAlert"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:alpha="0.8">
+
+    <com.neopixl.pixlui.components.textview.TextView
+        android:id="@+id/textViewAlertSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        pixlui:typeface="OpenSans-Light.ttf"/>
+
+</RelativeLayout>

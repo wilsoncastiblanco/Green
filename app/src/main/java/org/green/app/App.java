@@ -1,6 +1,12 @@
 package org.green.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.text.TextUtils;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import org.green.database.RealmDataBaseConnection;
 import org.green.utilities.preferences.PreferenceUtil;
@@ -8,7 +14,12 @@ import org.green.utilities.preferences.PreferenceUtil;
 
 public class App extends Application {
 
+  public static final String TAG = App.class.getSimpleName();
 
+  private RequestQueue mRequestQueue;
+
+  private static App mInstance;
+  private Context mContext;
 /*  private static GoogleAnalytics mGa;
   private static Tracker mTracker;
 
@@ -28,6 +39,10 @@ public class App extends Application {
 
   private static AlertTextView alertTextView;*/
   private static App app;
+
+  public static synchronized App getInstance() {
+    return (mInstance != null)  ? mInstance : new App();
+  }
 
   @Override
   public void onCreate() {
@@ -86,8 +101,31 @@ public class App extends Application {
     return mGa;
   }*/
 
-  public static App getInstance(){
-    return app;
+
+  public RequestQueue getRequestQueue() {
+    if (mRequestQueue == null) {
+      mRequestQueue = Volley.newRequestQueue(mContext);
+    }
+
+    return mRequestQueue;
+  }
+
+  public <T> void addToRequestQueue(Request<T> req, String tag, Context context) {
+    // set the default tag if tag is empty
+    mContext = context;
+    req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+    getRequestQueue().add(req);
+  }
+
+  public <T> void addToRequestQueue(Request<T> req) {
+    req.setTag(TAG);
+    getRequestQueue().add(req);
+  }
+
+  public void cancelPendingRequests(Object tag) {
+    if (mRequestQueue != null) {
+      mRequestQueue.cancelAll(tag);
+    }
   }
 
 }

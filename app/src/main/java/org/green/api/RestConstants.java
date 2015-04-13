@@ -27,5 +27,5 @@ public class RestConstants {
   /**
    * URLs Services
    * */
-
+  public static String GET_RECOLLECTION_POINTS = BASE_URL + "get_recolection_points";
 }

@@ -1,6 +1,11 @@
 package org.green.database;
 
 import android.content.Context;
+import android.util.Log;
+
+import org.green.domain.RecollectionPoints;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -36,5 +41,43 @@ public class RealmDataBaseConnection {
 
   public static synchronized RealmDataBaseConnection getInstance(Context context){
     return (mInstance == null) ? new RealmDataBaseConnection(context): mInstance;
+  }
+
+  /**
+   * Map one string in class of realm
+   * @param stringJsonArray
+   * @param eClass
+   */
+  public static void mapRealmObjByJsonArray(String stringJsonArray, Class<? extends io.realm.RealmObject> eClass){
+    if(stringJsonArray == null){
+      return;
+    }
+    realm.beginTransaction();
+    try {
+      JSONArray allObject = new JSONArray(stringJsonArray);
+      realm.createOrUpdateAllFromJson(eClass, allObject);
+    } catch (JSONException e) {
+      e.printStackTrace();
+      Log.e(LOG_TAG, "json error exception", e);
+    }
+    realm.commitTransaction();
+  }
+
+  public static void mapRealmObjByJsonObject(String stringJsonObject, Class<? extends io.realm.RealmObject> eClass){
+    if(stringJsonObject == null){
+      return;
+    }
+    realm.beginTransaction();
+    realm.createOrUpdateObjectFromJson(eClass, stringJsonObject);
+    realm.commitTransaction();
+  }
+
+  /**
+   * Load recollection points list
+   */
+  public static List<RecollectionPoints> loadRecollectionPointsList( ){
+    List<RecollectionPoints> result = realm.where(RecollectionPoints.class).findAll();
+    realm.commitTransaction();
+    return result;
   }
 }
