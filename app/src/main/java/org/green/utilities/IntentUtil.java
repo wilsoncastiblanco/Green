@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
+import org.green.modules.main.SettingsActivity;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,6 +57,10 @@ public class IntentUtil {
 
   public static void startActivity(Context context, Class cls) {
     context.startActivity(new Intent(context, cls));
+  }
+
+  public static void startSettingsActivity(Context context){
+    startActivity(context, SettingsActivity.class);
   }
 /*
   public static void startMenuActivity(Activity context, Class cls) {

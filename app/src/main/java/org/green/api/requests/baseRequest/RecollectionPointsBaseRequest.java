@@ -46,17 +46,16 @@ public class RecollectionPointsBaseRequest {
   }
 
 
-  public void callRecollectionPoints(Context context, RecollectionPointsParams recollectionPointsParams) {
+  public void callRecollectionPoints(Context context, final RecollectionPointsParams recollectionPointsParams) {
     String tag_json_points = "recollection_points_tag";
     Context mContext = context;
-    Map<String, String> params = new HashMap<>();
+    final Map<String, String> params = new HashMap<>();
     params.put(RestParams.LATITUDE, String.valueOf(recollectionPointsParams.getLatitude()));
     params.put(RestParams.LONGITUDE, String.valueOf(recollectionPointsParams.getLongitude()));
     params.put(RestParams.DISTANCE, String.valueOf(recollectionPointsParams.getDistance()));
     params.put(RestParams.LIMIT, String.valueOf(recollectionPointsParams.getLimit()));
     params.put(RestParams.UNIT, recollectionPointsParams.getUnit());
-    //CelebrityAuthenticationProvider.getInstance().authenticateRequestCruises(params, cruiseRequest);
-    Request request = new RecollectionPointsContent(Request.Method.POST, RestConstants.GET_RECOLLECTION_POINTS, null, params, OnSuccess(), OnError()){
+    Request request = new RecollectionPointsContent(Request.Method.POST, RestConstants.GET_RECOLLECTION_POINTS, new Gson().toJson(params), OnSuccess(), OnError()){
       @Override
       public String getBodyContentType() {
         return RestConstants.CONTENT_TYPE_URLENCODED;
@@ -65,6 +64,11 @@ public class RecollectionPointsBaseRequest {
       @Override
       public Map<String, String> getHeaders() throws AuthFailureError {
         return GreenAuthenticationProvider.getInstance().authenticateHeaders();
+      }
+
+      @Override
+      public Map<String, String> getParams() {
+        return params;
       }
     };
     request.setRetryPolicy(RestConstants.defaultRetryPolicy);

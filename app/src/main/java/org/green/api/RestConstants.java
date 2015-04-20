@@ -11,7 +11,8 @@ public class RestConstants {
   /**
    * Pagination params
    */
-  public static final int PAGINATION_COUNT   = 10;
+  public static final int PAGINATION_COUNT   = 30;
+  public static final int DISTANCE = 15;
 
   /**
    * Timeout params

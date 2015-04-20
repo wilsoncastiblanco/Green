@@ -33,7 +33,7 @@ public class RealmDataBaseConnection {
   public RealmDataBaseConnection(Context context) {
     mContext = context;
     //delete all database
-    //Realm.deleteRealmFile(mContext);
+    Realm.deleteRealmFile(mContext);
     //re-instance the database
     realm = Realm.getInstance(mContext);
     mInstance = this;
@@ -42,6 +42,8 @@ public class RealmDataBaseConnection {
   public static synchronized RealmDataBaseConnection getInstance(Context context){
     return (mInstance == null) ? new RealmDataBaseConnection(context): mInstance;
   }
+
+
 
   /**
    * Map one string in class of realm

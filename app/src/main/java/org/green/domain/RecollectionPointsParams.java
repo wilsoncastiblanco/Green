@@ -4,25 +4,25 @@ package org.green.domain;
  * Created by wilsoncastiblanco on 4/12/15.
  */
 public class RecollectionPointsParams {
-  private float latitude;
-  private float longitude;
+  private double latitude;
+  private double longitude;
   private String unit;
   private int limit;
   private int distance;
 
-  public float getLatitude() {
+  public double getLatitude() {
     return latitude;
   }
 
-  public void setLatitude(float latitude) {
+  public void setLatitude(double latitude) {
     this.latitude = latitude;
   }
 
-  public float getLongitude() {
+  public double getLongitude() {
     return longitude;
   }
 
-  public void setLongitude(float longitude) {
+  public void setLongitude(double longitude) {
     this.longitude = longitude;
   }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_units_options">
+        <item>@string/pref_units_label_kilometers</item>
+        <item>@string/pref_units_label_miles</item>
+    </string-array>
+
+    <string-array name="pref_units_values">
+        <item>@string/pref_units_kilometers</item>
+        <item>@string/pref_units_miles</item>
+    </string-array>
+</resources>

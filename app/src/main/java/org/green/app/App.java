@@ -49,6 +49,7 @@ public class App extends Application {
     super.onCreate();
     app = this;
     RealmDataBaseConnection.getInstance(this);
+
     PreferenceUtil.init(this);
 
     LocationHolder.init();
