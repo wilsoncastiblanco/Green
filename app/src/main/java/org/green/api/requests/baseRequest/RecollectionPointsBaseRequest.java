@@ -16,6 +16,7 @@ import org.green.api.requests.headers.GreenAuthenticationProvider;
 import org.green.app.App;
 import org.green.domain.RecollectionPoints;
 import org.green.domain.RecollectionPointsParams;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class RecollectionPointsBaseRequest {
     Request request = new RecollectionPointsContent(Request.Method.POST, RestConstants.GET_RECOLLECTION_POINTS, new Gson().toJson(params), OnSuccess(), OnError()){
       @Override
       public String getBodyContentType() {
-        return RestConstants.CONTENT_TYPE_URLENCODED;
+        return RestConstants.CONTENT_TYPE_JSON;
       }
 
       @Override
@@ -67,8 +68,18 @@ public class RecollectionPointsBaseRequest {
       }
 
       @Override
-      public Map<String, String> getParams() {
+      public Map<String, String> getParams() throws AuthFailureError{
+        params.put(RestParams.LATITUDE, String.valueOf(recollectionPointsParams.getLatitude()));
+        params.put(RestParams.LONGITUDE, String.valueOf(recollectionPointsParams.getLongitude()));
+        params.put(RestParams.DISTANCE, String.valueOf(recollectionPointsParams.getDistance()));
+        params.put(RestParams.LIMIT, String.valueOf(recollectionPointsParams.getLimit()));
+        params.put(RestParams.UNIT, recollectionPointsParams.getUnit());
         return params;
+      }
+
+      @Override
+      public byte[] getBody() {
+        return super.getBody();
       }
     };
     request.setRetryPolicy(RestConstants.defaultRetryPolicy);

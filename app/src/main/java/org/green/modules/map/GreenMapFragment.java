@@ -100,7 +100,7 @@ public class GreenMapFragment extends Fragment implements LocationListener {
     if(location!=null){
       onLocationChanged(location);
     }
-    locationManager.requestLocationUpdates(provider, 20000, 0, this);
+    locationManager.requestLocationUpdates(provider, 400000, 0, this);
   }
 
   @Override
@@ -135,7 +135,7 @@ public class GreenMapFragment extends Fragment implements LocationListener {
       @Override
       public void onDataListLoad() {
         List<RecollectionPoints> recollectionPointsList = RealmDataBaseConnection.loadRecollectionPointsList();
-        Log.i("Green data", new Gson().toJson(recollectionPointsList));
+        Log.i("Green data", recollectionPointsList.get(0).getAddress());
       }
 
       @Override

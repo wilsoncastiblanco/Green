@@ -8,6 +8,8 @@ public class RestParams {
   public static String STATUS = "status";
   public static String TOTAL_RECORDS = "total_records";
   public static String MESSAGE = "message";
+  public static String SUCCESS = "success";
+  public static String ERROR  = "error";
   /**
    * Recollection points params
    * */

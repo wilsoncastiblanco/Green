@@ -8,10 +8,12 @@ public class RestConstants {
    * */
   public static final String DEFAULT_PARAMS_ENCODING = "UTF-8";
   public static String CONTENT_TYPE_URLENCODED = "application/x-www-form-urlencoded";
+  public static String CONTENT_TYPE_JSON = "application/json; charset=utf-8";
+
   /**
    * Pagination params
    */
-  public static final int PAGINATION_COUNT   = 30;
+  public static final int PAGINATION_COUNT   = 5;
   public static final int DISTANCE = 15;
 
   /**

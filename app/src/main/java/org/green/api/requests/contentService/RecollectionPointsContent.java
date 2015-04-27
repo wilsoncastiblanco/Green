@@ -2,6 +2,7 @@ package org.green.api.requests.contentService;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
@@ -40,8 +41,8 @@ public class RecollectionPointsContent extends GsonRequest<List<RecollectionPoin
       String jsonString = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
       JsonParser jsonParser = new JsonParser();
       JsonObject jsonObject = (JsonObject) jsonParser.parse(jsonString);
-      boolean status = jsonObject.getAsJsonObject().get(RestParams.STATUS).getAsBoolean();
-      if(status){
+      String status = jsonObject.getAsJsonObject().get(RestParams.STATUS).getAsString();
+      if(status.equalsIgnoreCase(RestParams.SUCCESS)){
         JsonArray data = jsonObject.getAsJsonObject().getAsJsonArray(RestParams.DATA);
         response = GsonUtil.getGsonMapper().fromJson(data, new TypeToken<List<RecollectionPoints>>() {}.getType());
       }

@@ -1,5 +1,7 @@
 package org.green.api.requests.headers;
 
+import org.green.api.RestConstants;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +19,7 @@ public class GreenAuthenticationProvider {
 
   public Map authenticateHeaders() {
     Map<String,String> client = new HashMap<>();
-    client.put("Content-Type", "application/json");
-    client.put("Accept", "application/json");
+    client.put("Content-Type", RestConstants.CONTENT_TYPE_JSON);
     return client;
   }
 }
