@@ -13,8 +13,8 @@ public class RestConstants {
   /**
    * Pagination params
    */
-  public static final int PAGINATION_COUNT   = 5;
-  public static final int DISTANCE = 15;
+  public static final int PAGINATION_COUNT   = 1;
+  public static final int DISTANCE = 30;
 
   /**
    * Timeout params
@@ -30,5 +30,5 @@ public class RestConstants {
   /**
    * URLs Services
    * */
-  public static String GET_RECOLLECTION_POINTS = BASE_URL + "get_recolection_points";
+  public static String GET_RECOLLECTION_POINTS = BASE_URL + "get_recollection_points";
 }

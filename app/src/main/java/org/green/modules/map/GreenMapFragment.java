@@ -100,7 +100,7 @@ public class GreenMapFragment extends Fragment implements LocationListener {
     if(location!=null){
       onLocationChanged(location);
     }
-    locationManager.requestLocationUpdates(provider, 400000, 0, this);
+    locationManager.requestLocationUpdates(provider, 400000, RestConstants.DISTANCE, this);
   }
 
   @Override
@@ -130,12 +130,13 @@ public class GreenMapFragment extends Fragment implements LocationListener {
   }
 
   private void getLocationData(){
+    Log.i("Green Loop", "????????????????");
     GetRecollectionPoints getRecollectionPoints = new GetRecollectionPoints(getActivity(), getDataUser());
     getRecollectionPoints.setDestionationsEventListener(new GetRecollectionPoints.DestinationsListEventListener() {
       @Override
       public void onDataListLoad() {
         List<RecollectionPoints> recollectionPointsList = RealmDataBaseConnection.loadRecollectionPointsList();
-        Log.i("Green data", recollectionPointsList.get(0).getAddress());
+        Log.i("Green data", recollectionPointsList.get(0).getCode());
       }
 
       @Override

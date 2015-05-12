@@ -9,14 +9,19 @@ import io.realm.annotations.PrimaryKey;
 public class RecollectionPoints extends RealmObject {
   @PrimaryKey
   private int idLocation;
-  private int idRecolectionType;
-  private String description;
-  private String address;
-  private float latitude;
-  private float longitude;
+  private int idRecollectionType;
   private String type;
   private String code;
-  private float distance;
+
+  public RecollectionPoints() {
+  }
+
+  public RecollectionPoints(int idLocation, int idRecollectionType, String description, String address, float latitude, float longitude, String type, String code, float distance) {
+    this.idLocation = idLocation;
+    this.idRecollectionType = idRecollectionType;
+    this.type = type;
+    this.code = code;
+  }
 
   public int getIdLocation() {
     return idLocation;
@@ -26,45 +31,14 @@ public class RecollectionPoints extends RealmObject {
     this.idLocation = idLocation;
   }
 
-  public int getIdRecolectionType() {
-    return idRecolectionType;
+  public int getIdRecollectionType() {
+    return idRecollectionType;
   }
 
-  public void setIdRecolectionType(int idRecolectionType) {
-    this.idRecolectionType = idRecolectionType;
+  public void setIdRecollectionType(int idRecolectionType) {
+    this.idRecollectionType = idRecolectionType;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public float getLatitude() {
-    return latitude;
-  }
-
-  public void setLatitude(float latitude) {
-    this.latitude = latitude;
-  }
-
-  public float getLongitude() {
-    return longitude;
-  }
-
-  public void setLongitude(float longitude) {
-    this.longitude = longitude;
-  }
 
   public String getType() {
     return type;
@@ -82,11 +56,4 @@ public class RecollectionPoints extends RealmObject {
     this.code = code;
   }
 
-  public float getDistance() {
-    return distance;
-  }
-
-  public void setDistance(float distance) {
-    this.distance = distance;
-  }
 }

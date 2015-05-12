@@ -15,6 +15,7 @@ import org.green.api.requests.contentService.RecollectionPointsContent;
 import org.green.api.requests.headers.GreenAuthenticationProvider;
 import org.green.app.App;
 import org.green.domain.RecollectionPoints;
+import org.green.domain.RecollectionPointsA;
 import org.green.domain.RecollectionPointsParams;
 import org.json.JSONObject;
 
@@ -95,10 +96,10 @@ public class RecollectionPointsBaseRequest {
     };
   }
 
-  private Response.Listener<List<RecollectionPoints>> OnSuccess() {
-    return new Response.Listener<List<RecollectionPoints>>() {
+  private Response.Listener<List<RecollectionPointsA>> OnSuccess() {
+    return new Response.Listener<List<RecollectionPointsA>>() {
       @Override
-      public void onResponse(List<RecollectionPoints> response) {
+      public void onResponse(List<RecollectionPointsA> response) {
         if(listener != null){
           listener.onSuccess(new Gson().toJson(response));
         }
